@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Check Reservation Status</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            background: rgba( 255, 255, 255, 0.2 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 13px );
+            -webkit-backdrop-filter: blur( 13px );
+            border-radius: 10px;
+        }
+        .form-signin {
+            width: 100%;
+            max-width: 400px;
+        }
+        .form-signin .form-control {
+            margin-bottom: 15px;
+        }
+        .result-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .alert {
+            margin-bottom: 15px;
+        }
+        .btn-back {
+            margin-top: 10px;
+        }
+        .reservation-details {
+            width: 100%;
+            max-width: 400px;
+            text-align: left;
+            margin-left: 20px;
+        }
+        .reservation-details h2 {
+            margin-bottom: 15px;
+        }
+        .reservation-details p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <form class="form-signin" method="post" action="{{ url_for('check_status') }}">
+                <h1 class="h3 mb-3 font-weight-normal">Check Reservation Status</h1>
+                <label for="inputReservationId" class="sr-only">Reservation ID</label>
+                <input type="text" id="inputReservationId" name="reservation_id" class="form-control" placeholder="Reservation ID" required autofocus>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Check Status</button>
+            </form>
+            <form class="form-signin btn-back" action="{{ url_for('customer') }}" method="get">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Back</button>
+            </form>
+            <div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="result-container">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            </div>
+            {% if reservation %}
+            <div class="reservation-details" class="form-signin">
+                <h2>Reservation Details</h2>
+                <p><strong>Reservation ID:</strong> {{ reservation['reservation_id'] }}</p>
+                <p><strong>Name:</strong> {{ reservation['name'] }}</p>
+                <p><strong>Party Size:</strong> {{ reservation['party_size'] }}</p>
+                <p><strong>Status:</strong> {{ reservation['status'] }}</p>
+            </div>
+        {% endif %}
+        </div>
+        
+    </div>
+    <footer>
+        <p>&copy; Nair Mess. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

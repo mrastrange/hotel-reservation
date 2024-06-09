@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Admin Interface</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+</head>
+<body >
+    <div class="container">
+        <div class="form-signin">
+            <form >
+                <h1>Admin Interface</h1>
+                <h2>Reservation Queue</h2>
+                <ul>
+                    {% for reservation in reservation_queue %}
+                        <li>
+                            Name: {{ reservation['name'] }}, Party Size: {{ reservation['party_size'] }}
+                            <form action="{{ url_for('admin') }}" method="post" style="display: inline;" >
+                                <input type="hidden" name="reservation_id" value="{{ reservation['reservation_id'] }}">
+                        
+                        </form>
+                        </li>
+                    {% endfor %}
+                
+                </ul>
+                <h2>Reserved Tables</h2>
+                <ul>
+                    {% for table in reserved_tables %}
+                        <li>
+                            Name: {{ table['name'] }}, Party Size: {{ table['party_size'] }}
+                            <form action="{{ url_for('admin') }}" method="post" style="display: inline;>
+                                <input type="hidden" name="reservation_id" value="{{ table['reservation_id'] }}">
+                        
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <form action="{{ url_for('admin') }}" method="post" style="display: inline;">
+                    <button class="btn btn-lg btn-primary btn-block" name="action" value="accept_next" type="submit">Accept Next Reservation</button>
+                    <button class="btn btn-lg btn-primary btn-block" name="action" value="decline_next" type="submit">Decline Next Reservation</button>
+                    <button class="btn btn-lg btn-primary btn-block" name="action" value="clear_one_reservation" type="submit">Clear One Reserved Table</button>
+                    <button class="btn btn-lg btn-primary btn-block" name="action" value="clear_reservations" type="submit">Clear All Reserved Table</button>
+                   
+
+                </form>
+            </form>
+    
+            <form action="{{ url_for('logout') }}" method="get" >
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
+            </form>
+            <div >
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul>
+                        {% for category, message in messages %}
+                        <li class="alert alert-{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; Nair Mess. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
