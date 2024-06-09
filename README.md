@@ -6,15 +6,15 @@
 <br>
 <h3>:eye_speech_bubble: Screenshots</h3>
 <br>
-![](imgs/img1.jpg)
+![](imgs/img1.png)
 <br>
-![](imgs/img2.jpg)
+![](imgs/img2.png)
 <br>
-![](imgs/img3.jpg)
+![](imgs/img3.png)
 <br>
-![](imgs/img4.jpg)
+![](imgs/img4.png)
 <br>
-![](imgs/img5.jpg)
+![](imgs/img5.png)
 <br>
-![](imgs/img6.jpg)
+![](imgs/img6.png)
 <br>
