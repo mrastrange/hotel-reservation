@@ -279,5 +279,24 @@ def check_status():
         return render_template('check_status.html')
     return redirect(url_for('login'))
 
+@flask_app.route('/endpoint', methods=['GET', 'POST'])
+def endpoint():
+    # Your endpoint logic here
+    return 'Hello from Flask endpoint!'
+
+# Embed the Flask app into the Streamlit app
+def run_flask_app():
+    from werkzeug.middleware.dispatcher import DispatcherMiddleware
+    from werkzeug.serving import run_simple
+
+    app = DispatcherMiddleware(flask_app)
+    run_simple('localhost', 5000, app)
+
+# Streamlit app logic
+def main():
+    st.title('Streamlit and Flask Integration')
+    if st.button('Start Flask Server'):
+        run_flask_app()
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    main()
