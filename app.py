@@ -279,7 +279,7 @@ def check_status():
         return render_template('check_status.html')
     return redirect(url_for('login'))
 
-@flask_app.route('/endpoint', methods=['GET', 'POST'])
+@app.route('/endpoint', methods=['GET', 'POST'])
 def endpoint():
     # Your endpoint logic here
     return 'Hello from Flask endpoint!'
