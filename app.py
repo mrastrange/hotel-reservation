@@ -289,14 +289,14 @@ def endpoint():
     return 'Hello from Flask endpoint!'
 
 def run_flask_app():
-    app = DispatcherMiddleware(flask_app)
+    app = DispatcherMiddleware(app)
     run_simple('localhost', 5000, app)
 
 # Streamlit app logic
 def main():
     st.title('Streamlit and Flask Integration')
     if st.button('Start Flask Server'):
-        threading.Thread(target=run_app).start()
+        threading.Thread(target=run_flask_app).start()
         st.success('Flask server started on port 5000')
 
 if __name__ == '__main__':
