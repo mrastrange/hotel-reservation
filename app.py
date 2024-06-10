@@ -5,6 +5,9 @@ import os
 import secrets
 import string
 import smtplib
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from werkzeug.serving import run_simple
+import threading
 
 # Send mail notification for reservations
 def mailit(data, a_d):
