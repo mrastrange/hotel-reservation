@@ -284,11 +284,7 @@ def endpoint():
     # Your endpoint logic here
     return 'Hello from Flask endpoint!'
 
-# Embed the Flask app into the Streamlit app
 def run_flask_app():
-    from werkzeug.middleware.dispatcher import DispatcherMiddleware
-    from werkzeug.serving import run_simple
-
     app = DispatcherMiddleware(flask_app)
     run_simple('localhost', 5000, app)
 
@@ -296,7 +292,8 @@ def run_flask_app():
 def main():
     st.title('Streamlit and Flask Integration')
     if st.button('Start Flask Server'):
-        run_flask_app()
+        threading.Thread(target=run_flask_app).start()
+        st.success('Flask server started on port 5000')
 
 if __name__ == '__main__':
     main()
