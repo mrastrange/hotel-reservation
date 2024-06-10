@@ -296,7 +296,7 @@ def run_flask_app():
 def main():
     st.title('Streamlit and Flask Integration')
     if st.button('Start Flask Server'):
-        threading.Thread(target=run_flask_app).start()
+        threading.Thread(target=run_app).start()
         st.success('Flask server started on port 5000')
 
 if __name__ == '__main__':
